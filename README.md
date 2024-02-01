@@ -1,38 +1,59 @@
-# Namada
-
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](./LICENSE)
-![CI Status](https://github.com/anoma/namada/actions/workflows/build-and-test.yml/badge.svg?branch=main)
-
 ## Overview
 
-[Namada](http://namada.net) is a Proof-of-Stake L1 for interchain asset-agnostic privacy. Namada uses CometBFT
-consensus and enables multi-asset shielded transfers for any native
-or non-native asset. Namada features full IBC protocol support,
-a natively integrated Ethereum bridge, a modern proof-of-stake
-system with automatic reward compounding and cubic slashing, and a
-stake-weighted governance signalling mechanism. Users of shielded
-transfers are rewarded for their contributions to the privacy set in
-the form of native protocol tokens. A multi-asset shielded transfer
-wallet is provided in order to facilitate safe and private user
-interaction with the protocol.
+Namada serves as a Proof-of-Stake Layer 1 (L1) platform designed for interchain asset-agnostic privacy. Utilizing the CometBFT consensus, Namada empowers multi-asset shielded transfers for both native and non-native assets. The platform boasts comprehensive support for the Inter-Blockchain Communication (IBC) protocol, along with a seamlessly integrated Ethereum bridge.
 
-* Blogpost: [Introducing Namada: Interchain Asset-agnostic Privacy](https://blog.namada.net/introducing-namada-interchain-asset-agnostic-privacy/)
+Namada operates on a contemporary proof-of-stake system featuring automatic reward compounding and cubic slashing. Additionally, it incorporates a stake-weighted governance signaling mechanism. Users engaged in shielded transfers receive rewards in native protocol tokens as acknowledgment for their contributions to the privacy set.
 
-## 📓 Docs
+To enhance user interaction with the protocol, Namada offers a dedicated multi-asset shielded transfer wallet, ensuring a secure and private experience for users.
 
-* dev docs: built from [dev mdBook](./documentation/dev/)
+
 
 ## Warning
 
-> Here lay dragons: this codebase is still experimental, try at your own risk!
+This is A Experimental code, try at your own risk!
 
 ## 💾 Installing
 
-There is a single command to build and install Namada executables from source (the node, the client and the wallet). This command will also verify that a compatible version of [CometBFT](#dependencies) is available and if not, attempt to install it. Note that currently at least 16GB RAM is needed to build from source.
+1. Install Pre-requisites:
+
+
+```shell
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make libudev-dev protobuf-compiler ncdu -y
+```
+
+2. Install Rust and Setup:
+   
+
+```shell
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+To configure shell you may need to run this command: 
+
+```shell
+source "$HOME/.cargo/env"
+```
+
+3. Copy Namada repo from Github:
+
+
+```shell
+git clone https://github.com/anoma/namada
+```
+
+4. Set Namada as Directory.
+
+```shell
+cd namada
+```
+
+ 
+5. Run this command, this will Install from Source and compile a executable : "namada" : 
+
 
 ```shell
 make install
 ```
+
 
 After installation, the main `namada` executable will be available on path.
 
@@ -42,42 +63,9 @@ For more detailed instructions and more install options, see the [Install
 section](https://docs.namada.net/user-guide/install/index.html) of the User
 Guide.
 
-## ⚙️ Development
+## ⚙️ Node Setup
 
-```shell
-# Build the provided validity predicate and transaction wasm modules
-make build-wasm-scripts-docker
-```
 
-### Before submitting a PR, pls make sure to run the following
-
-```shell
-# Format the code
-make fmt
-
-# Lint the code
-make clippy
-```
-
-## 🧾 Logging
-
-To change the log level, set `NAMADA_LOG` environment variable to one of:
-
-* `error`
-* `warn`
-* `info`
-* `debug`
-* `trace`
-
-The default is set to `info` for all the modules, expect for CombetBFT ABCI, which has a lot of `debug` logging.
-
-For more fine-grained logging levels settings, please refer to the [tracing subscriber docs](https://docs.rs/tracing-subscriber/0.2.18/tracing_subscriber/struct.EnvFilter.html#directives) for more information.
-
-To switch on logging in tests that use `#[test]` macro from `test_log::test`, use `RUST_LOG` with e.g. `RUST_LOG=info cargo test -- --nocapture`.
-
-## How to contribute
-
-Please see the [contributing page](./CONTRIBUTING.md).
 
 ### Dependencies
 
